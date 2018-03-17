@@ -48,26 +48,6 @@ int printThingLine(int thingArray[], int largestPart, int i) {
    return 0;
 }
 
-//int largestPart(int &arrayList, int N) {
-//    int maxValue = 0;
-
-//    for(int i = 0; i < N; i++) {
-//        if(arrayList[i] > maxValue) {
-//            maxValue = arrayList[];
-//        }
-//    }
-//    return maxValue;
-//}
-
-//printThing(int &arrayList, int largestInput, int N) {
-//    int z = 0;
-//    for (int i = 0; i < N; i++) {
-//    z = arrayList[i];
-//    cout << " ";
-
-//    }
-
-//}
 /**task #30 Print an array.
 *@param (1) subject array, (2) its size.
 */
@@ -83,7 +63,7 @@ int printAnArray(int someArray[], int arraySize) {
 *@param (1) subject array, (2) its size.
 *@return reversed array.
 */
-int reverseArray( int a[], int n ) {
+int reverseArray( int* a, int n ) {
 
     for ( int i = 0; i < n / 2; i++ )
     {
@@ -91,7 +71,7 @@ int reverseArray( int a[], int n ) {
         a[i] = a[n - i - 1];
         a[n - i - 1 ] = tmp;
     }
-    return *a;
+    return 0;
 }
 int main() {
 
@@ -104,7 +84,7 @@ int main() {
     int arrayOfHouses[housesAmount]; //task #23
 
     int bankCards[10]; //task #24 - 10 cards
-    int transaction; //task #24 - money value +input or -output
+    int transaction = -1; //task #24 - money value +input or -output
     int firstCard = 0; //task #24 -first card
     int lastCard = 9; //task #24 -last of..
     int minValue = -1000; //task #24 max -outgoing
@@ -193,7 +173,7 @@ int main() {
                 cout << endl;
             }
             cout <<"Exit." << endl;
-            return 0;
+            delete [] bankCards;
             break;
 
             case 25: //centered thing
@@ -208,22 +188,24 @@ int main() {
                 while(randNum != 0 || counter > maxThingSize) {
                     if(randNum % 2 != 1) {
                         cout << "Wrong number. Enter only even numbers: " << endl;
-                        cin >> randNum;
-                    }
+                    } else {
+
                     thingArray[counter] = randNum;
 
                     if(largestPart < randNum) {
                         largestPart = randNum;
                     }
+                        counter++;
+                    }
                     cin >> randNum;
-                    counter++;
                 }
                 //print thing
                 for(int i = 0; i < counter; i++) {
                     printThingLine(thingArray, largestPart, i);
                 }
-
+            delete [] thingArray;
             break;
+
             case 30: //reverse array
                 cout << "Enter array range: " << endl;
                 cin >> a;
@@ -236,11 +218,13 @@ int main() {
 
                 printAnArray(m, a);
 
-                *m = reverseArray( m, a); //save reversed array
+                reverseArray( m, a); //save reversed array
 
                 printAnArray(m, a);
 
+            delete [] m;
             break;
+
             default:
                 cout << "invalid value" << endl;
             break;
