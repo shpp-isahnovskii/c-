@@ -95,6 +95,7 @@ int main() {
     int counter; //task #25 - counter for array need to know how many numbers user are already input
     int largestPart; //task #25 - largest number in the array
 
+    int *m;
     int a; // task #26
     int element; // task #26
 
@@ -203,13 +204,15 @@ int main() {
                 for(int i = 0; i < counter; i++) {
                     printThingLine(thingArray, largestPart, i);
                 }
-            delete [] thingArray;
+
             break;
 
             case 30: //reverse array
                 cout << "Enter array range: " << endl;
                 cin >> a;
-                int m[a];
+
+                m = (int *) calloc(a, sizeof(int));  //memory pointer for dynamic array size(a)
+                                                     //(think this memory bug fix)
 
                 for(int i = 0; i < a; i++ ) {
                    cin >> element;
